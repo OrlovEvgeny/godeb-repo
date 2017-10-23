@@ -327,16 +327,16 @@ func versionUpdate(repository string, debpack string, path string)  {
 	fmt.Println("debpack = ", debpack)
 	fmt.Println("Path = ", path)
 
-	if _, err := os.Stat(path + debpack); os.IsNotExist(err) {
+	if _, err := os.Stat(path + "/" + repository + ".json"); os.IsNotExist(err) {
 		// path/to/whatever does not exist
-		f, err := os.Create(path + debpack)
+		f, err := os.Create(path + "/" + repository + ".json")
 		if err != nil {
 			fmt.Print("Error: does not exist", err)
 		}
 		defer f.Close()
 	}
 
-	file, err := ioutil.ReadFile(path + debpack) //Read File
+	file, err := ioutil.ReadFile(path + "/" + repository + ".json") //Read File
 	if err != nil {
 		fmt.Print("Error:", err)
 	}
@@ -350,7 +350,7 @@ func versionUpdate(repository string, debpack string, path string)  {
 	version.Repository = repository
 
 	bolB, _ := json.Marshal(version)
-	err = ioutil.WriteFile(path+debpack, []byte(bolB), 0644)
+	err = ioutil.WriteFile(path + "/" + repository + ".json", []byte(bolB), 0644)
 	if err != nil {
 		fmt.Print("Error:", err)
 	}
