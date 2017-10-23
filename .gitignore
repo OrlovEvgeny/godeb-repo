@@ -1,0 +1,10 @@
+repo/
+.idea/
+conf.json
+*.pprof
+pkg/
+bin/
+vendor.orig/
+deb-simple
+debsimple.db
+build-stuff/
